@@ -90,17 +90,19 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
+    //prompt("A) \nB) \nC)");
    var firstName = promptFor("What is the person's first name?", chars);
    var lastName = promptFor("What is the person's last name?", chars);
 
-    let stuff = data.filter(function (el) {
-    if(el.firstName === firstName && el.lastName === lastName) {
-        return true;
-    }
-    });
-    console.log('People:', data);
-    console.log('"Person Found:', stuff);
+  let personFound = people.filter(function (el) {
+  if(el.firstName.toLowerCase() === firstName.toLowerCase() && el.lastName.toLowerCase() === lastName.toLowerCase()) {
+    console.log("Found Billy Bob.");
+    return true;
+  }
+  });
 
+  console.log('People:', data);
+  displayPerson(personFound[0]);
 }
 
 // alerts a list of people
