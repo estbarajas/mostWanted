@@ -90,13 +90,34 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-    //prompt("A) \nB) \nC)");
-   var firstName = promptFor("What is the person's first name?", chars);
-   var lastName = promptFor("What is the person's last name?", chars);
+   var searchByNameType = prompt("A) Full name search. \nB) First name search. \nC) Last name search.").toLowerCase();
+   var firstName;
+   var lastName;
+
+   if (searchByNameType === "a") {
+
+      firstName = promptFor("What is the person's first name?", chars);
+      lastName = promptFor("What is the person's last name?", chars);
+   }
+   else if (searchByNameType === "b") {
+      firstName = promptFor("What is the person's first name?", chars);
+
+   }
+   else if (searchByNameType === "c") {
+      lastName = promptFor("What is the person's last name?", chars);
+   }
+   else {
+      alert("Person not found.");
+      searchByName(people);
+   }
+
+
+
+
 
   let personFound = people.filter(function (el) {
   if(el.firstName.toLowerCase() === firstName.toLowerCase() && el.lastName.toLowerCase() === lastName.toLowerCase()) {
-    console.log("Found Billy Bob.");
+    //console.log("Found Billy Bob.");
     return true;
   }
   });
