@@ -8,6 +8,7 @@ function app(people){
   switch(searchType){
     case 'yes':
     // TODO: search by name
+    searchByName(people);
     break;
     case 'no':
     searchByTraits(people);
@@ -89,10 +90,16 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  var firstName = promptFor("What is the person's first name?", chars);
-  var lastName = promptFor("What is the person's last name?", chars);
+   var firstName = promptFor("What is the person's first name?", chars);
+   var lastName = promptFor("What is the person's last name?", chars);
 
-  // TODO: find the person using the name they entered
+    let stuff = data.filter(function (el) {
+    if(el.firstName === firstName && el.lastName === lastName) {
+        return true;
+    }
+    });
+    console.log('People:', data);
+    console.log('"Person Found:', stuff);
 
 }
 
