@@ -75,6 +75,7 @@ function mainMenu(person, people){
     displayPerson(person);
     break;
     case "family":
+    getFamily(person, people);
     // TODO: get person's family
     break;
     case "descendants":
@@ -91,14 +92,41 @@ function mainMenu(person, people){
   }
 }
 
-function findDescendants (person, people) {
-  let addAllDescendants;
+// function findDescendants (person, people) {
+//   let addAllDescendants = " ";
   
+//   for (i = 0; i < people.length; i++) {
+//     //console.log(people[0]);
+//     if ((people[i].parents[0] || people[i].parents[1] ) == person.id) {
+//     addAllDescendants += ("\nDescendant of " + person.firstName +  " " + person.lastName + ": " + people[i].firstName + " " + people[i].lastName);
+//     //findDescendants(people[i],people);
+//     }
+//   }
+// alert(addAllDescendants);
+//   //findDescendants(people[],people);
+ 
+// }
+
+function getFamily (person, people) {
+  let addAllFamily = " ";
+  console.log(people[20].firstName);
+  console.log(people[0].currentSpouse);
+  
+
   for (i = 0; i < people.length; i++) {
-    if ((people[i].parents[0] || people[i].parents[1] ) == person.id) {
-    console.log(people[i].firstName);
+    //console.log(people[0]);
+    if ((people[i].parents[0] || people[i].parents[1])  == person.id) {
+    addAllFamily += ("\nFamily member of " + person.firstName +  " " + person.lastName + ": " + people[i].firstName + " " + people[i].lastName);
+    //findDescendants(people[i],people);
+    console.log("jhggfd")
     }
+    // if (people[i].currentSpouse == person.id){
+    //   console.log("one");
+    // }
   }
+ //console("Family Member") 
+alert(addAllFamily);
+  //findDescendants(people[],people);
  
 }
 
