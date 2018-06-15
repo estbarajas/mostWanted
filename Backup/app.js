@@ -1,3 +1,5 @@
+//Test
+
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
@@ -90,79 +92,19 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-   var searchByNameType = prompt("A) Full name search. \nB) First name search. \nC) Last name search.").toLowerCase();
-    
-   var firstName;
-   var lastName;
-   let personFound;
-   if (searchByNameType === "a") {
-<<<<<<< HEAD
-        firstName = promptFor("What is the person's first name?", chars);
-        lastName = promptFor("What is the person's last name?", chars);
-        personFound = people.filter(function (el) {
-        if(el.firstName.toLowerCase() === firstName.toLowerCase() && el.lastName.toLowerCase() === lastName.toLowerCase()) {
-        return true;
-        }
-        });
-   }
-   else if (searchByNameType === "b") {
-        firstName = promptFor("What is the person's first name?", chars);
-        personFound = people.filter(function (el) {
-=======
+    //prompt("A) \nB) \nC)");
+   var firstName = promptFor("What is the person's first name?", chars);
+   var lastName = promptFor("What is the person's last name?", chars);
 
-        firstName = promptFor("What is the person's first name?", chars);
-        lastName = promptFor("What is the person's last name?", chars);
-       
-        let personFound = people.filter(function (el) {
-        if(el.firstName.toLowerCase() === firstName.toLowerCase() && el.lastName.toLowerCase() === lastName.toLowerCase()) {
-        //console.log("Found Billy Bob.");
-        return true;
-        }
-        });
+  let personFound = people.filter(function (el) {
+  if(el.firstName.toLowerCase() === firstName.toLowerCase() && el.lastName.toLowerCase() === lastName.toLowerCase()) {
+    console.log("Found Billy Bob.");
+    return true;
+  }
+  });
 
-        displayPerson(personFound[0]);  
-   }
-   else if (searchByNameType === "b") {
-        firstName = promptFor("What is the person's first name?", chars);
-        let personFound = people.filter(function (el) {
->>>>>>> 21f1cc25db878f8fbfb4c4e3d28613f81bc7f6c2
-        if(el.firstName.toLowerCase() === firstName.toLowerCase()) {
-        return true;
-        }
-        });
-<<<<<<< HEAD
-   }
-   else if (searchByNameType === "c") {
-        lastName = promptFor("What is the person's last name?", chars);
-        personFound = people.filter(function (el) {
-=======
-        displayPerson(personFound[0]);
-   }
-   else if (searchByNameType === "c") {
-        lastName = promptFor("What is the person's last name?", chars);
-        let personFound = people.filter(function (el) {
->>>>>>> 21f1cc25db878f8fbfb4c4e3d28613f81bc7f6c2
-        if(el.lastName.toLowerCase() === lastName.toLowerCase()) {
-        return true;
-        }
-        });
-<<<<<<< HEAD
-=======
-        displayPerson(personFound[0]);
->>>>>>> 21f1cc25db878f8fbfb4c4e3d28613f81bc7f6c2
-   }
-   else {
-      alert("Person not found.");
-      searchByName(people);
-   }
-
-<<<<<<< HEAD
-   displayPeople(personFound);
-=======
-
-//  console.log('People:', data);
-//  displayPerson(personFound[0]);
->>>>>>> 21f1cc25db878f8fbfb4c4e3d28613f81bc7f6c2
+  console.log('People:', data);
+  displayPerson(personFound[0]);
 }
 
 // alerts a list of people
