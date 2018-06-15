@@ -78,6 +78,7 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
+    findDescendants(person, people);
     // TODO: get person's descendants
     break;
     case "restart":
@@ -88,6 +89,17 @@ function mainMenu(person, people){
     default:
     return mainMenu(person, people); // ask again
   }
+}
+
+function findDescendants (person, people) {
+  let addAllDescendants;
+  
+  for (i = 0; i < people.length; i++) {
+    if ((people[i].parents[0] || people[i].parents[1] ) == person.id) {
+    console.log(people[i].firstName);
+    }
+  }
+ 
 }
 
 function searchByName(people){
