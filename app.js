@@ -72,6 +72,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
+    displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
@@ -107,7 +108,6 @@ function searchByName(people){
         }
         });
 
- 
    }
    else if (searchByNameType === "b") {
         firstName = promptFor("What is the person's first name?", chars);
@@ -115,7 +115,20 @@ function searchByName(people){
         if(el.firstName.toLowerCase() === firstName.toLowerCase()) {
         return true;
         }
+
+        // else {
+        //   //return false;
+        //   alert("No matching results.");
+        //   //return false;
+        //   searchByName(people);
+        // }
         });
+        // if (personFound.length <= 0){
+        //   //console.log("No matching results.");
+        //   alert("No matching results.");
+        //   //searchByName(people);
+        //   return false;
+        // }
    }
    else if (searchByNameType === "c") {
         lastName = promptFor("What is the person's last name?", chars);
@@ -129,8 +142,8 @@ function searchByName(people){
       alert("Person not found.");
       searchByName(people);
    }
-
-    displayPeople(personFound); 
+    mainMenu(personFound[0],people);
+    //displayPeople(personFound); 
 
 }
 
@@ -144,8 +157,18 @@ function displayPeople(people){
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  var personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
+  var personInfo = "First name: " + person.firstName + "\n";
+  personInfo += "Last name: " + person.lastName + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "DOB: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eye color: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
+  personInfo += "Parents: " + person.parents + "\n";
+  personInfo += "Current spouse: " + person.currentSpouse + "\n";
+  personInfo += "Id: " + person.id + "\n";
+
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
