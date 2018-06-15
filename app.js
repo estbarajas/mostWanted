@@ -94,47 +94,44 @@ function searchByName(people){
     
    var firstName;
    var lastName;
+   let personFound;
 
    if (searchByNameType === "a") {
 
         firstName = promptFor("What is the person's first name?", chars);
         lastName = promptFor("What is the person's last name?", chars);
        
-        let personFound = people.filter(function (el) {
+        personFound = people.filter(function (el) {
         if(el.firstName.toLowerCase() === firstName.toLowerCase() && el.lastName.toLowerCase() === lastName.toLowerCase()) {
-        //console.log("Found Billy Bob.");
         return true;
         }
         });
 
-        displayPerson(personFound[0]);  
+ 
    }
    else if (searchByNameType === "b") {
         firstName = promptFor("What is the person's first name?", chars);
-        let personFound = people.filter(function (el) {
+        personFound = people.filter(function (el) {
         if(el.firstName.toLowerCase() === firstName.toLowerCase()) {
         return true;
         }
         });
-        displayPerson(personFound[0]);
    }
    else if (searchByNameType === "c") {
         lastName = promptFor("What is the person's last name?", chars);
-        let personFound = people.filter(function (el) {
+        personFound = people.filter(function (el) {
         if(el.lastName.toLowerCase() === lastName.toLowerCase()) {
         return true;
         }
         });
-        displayPerson(personFound[0]);
    }
    else {
       alert("Person not found.");
       searchByName(people);
    }
 
+    displayPeople(personFound); 
 
-//  console.log('People:', data);
-//  displayPerson(personFound[0]);
 }
 
 // alerts a list of people
