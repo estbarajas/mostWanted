@@ -99,30 +99,94 @@ function searchByEyeColor(people) {
   return newArray;
 }
 
-// function searchByGender(people) {
-//   let userInput = prompt("What color are their eyes?");
-//   let newArray;
-//   newArray = people.filter(function (el) {
-//     if(el.eyeColor == userInput) { 
-//       return true;
-//     }
-//     });
-//   return newArray;
-// }
+function searchByGender(people) {
+  let userInput = prompt("What is their gender?");
+  let newArray;
+  newArray = people.filter(function (el) {
+    if(el.gender == userInput) { 
+      return true;
+    }
+    });
+  return newArray; 
+}
 
-// function searchByAge(people) {
-//   let userInput = prompt("What year were they born?");
-//   let userInputMonth = prompt("What month were they born?");
-//   let userInputDay = prompt("What day were they born?");
+function searchByAge(people) {
 
-//   let newArray;
-//   newArray = people.filter(function (el) {
-//     if(el.eyeColor == userInput) { 
-//       return true;
-//     }
-//     });
-//   return newArray;
-// }
+  
+
+  // console.log(month2);
+  // console.log(day2);
+  // console.log(year2);
+
+  //let userInputAgeSearch = prompt("Enter the age");
+  // let userInputYear = prompt("What year were they born? ex.(1990)");
+  // let userInputMonth = prompt("What month were they born? ex.(march)").toLowerCase();
+  // let userInputDay = prompt("What day were they born? ex.(01)");
+  // let month = ["0", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+  // for (i = 1; i < month.length; i++) {
+  //   if (month[i] == userInputMonth) {
+  //     userInputMonth = i;
+  //   }
+  // }
+
+  
+
+  
+    let dobInfo;
+    let peopleDob;
+    let peopleMonth;
+    let peopleDay;
+    let peopleYear;
+    let userInputAge = prompt("Enter the age.");
+    let allSameAge = "";
+  
+
+
+  // let birthday = new Date(userInputYear, userInputMonth, userInputDay);
+  // let ageDifference = Date.now() - birthday.getTime();
+  // let ageDate = new Date(ageDifference); 
+  // console.log(Math.abs(ageDate.getUTCFullYear() - 1970));
+  // return Math.abs(ageDate.getUTCFullYear() - 1970); 
+
+  
+for (i = 0; i < 3; i++) {
+  if (calculateAge(people[i]) == userInputAge) {
+    allSameAge += "\n" + people[i].firstName + " " + people[i].lastName;
+
+  }
+
+  
+    //searchByName(people);
+  
+  // if (userInputAge == people[i].dob){
+
+  // }
+}
+alert("Results found:" + allSameAge);
+
+return people[0];
+  // let birthday = new Date(peopleYear, peopleMonth, peopleDay);
+  // let ageDifference = Date.now() - birthday.getTime();
+  // let ageDate = new Date(ageDifference); 
+  // console.log(Math.abs(ageDate.getUTCFullYear() - 1970));
+  // return Math.abs(ageDate.getUTCFullYear() - 1970);
+ 
+}
+
+function calculateAge (person) {
+
+  dobInfo = person.dob.split("/");
+  personDob = dobInfo;
+  personMonth = personDob[0];
+  personDay = personDob[1];
+  personYear = personDob[2]; 
+
+  let birthday = new Date(personYear, personMonth, personDay);
+  let ageDifference = Date.now() - birthday.getTime();
+  let ageDate = new Date(ageDifference); 
+  return Math.abs(ageDate.getUTCFullYear() - 1970); 
+
+}
 
 function searchByOccupation(people) {
   let userInput = prompt("What is their occupation?");
