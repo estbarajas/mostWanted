@@ -25,7 +25,8 @@ function searchByTraits(people) {
   let filteredPeople;
   let numberOfPeopleFound = 0;
   let personFound;
-  let newArray;
+  let foundPerson;
+  let peopleFound = "";
 
   switch(userSearchChoice) {
     case "height":
@@ -34,7 +35,18 @@ function searchByTraits(people) {
     case "weight":
       filteredPeople = searchByWeight(people);
       break;
-    // so on and so forth
+    case "eye color":
+      filteredPeople = searchByEyeColor(people);
+      break;
+    case "gender":
+      filteredPeople = searchByGender(people);
+      break;
+    case "age":
+      filteredPeople = searchByAge(people);
+      break;
+    case "occupation":
+      filteredPeople = searchByOccupation(people);
+      break;
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -42,44 +54,84 @@ function searchByTraits(people) {
   }  
 
   if (filteredPeople.length > 1) {
-    let selectedPerson = prompt("Choose one of the following:" + "\nA) " + filteredPeople[0].firstName + " "+ filteredPeople[0].lastName + "\nB) " + filteredPeople[1].firstName + " " + filteredPeople[1].lastName);  
-    if ( selectedPerson.toLowerCase() === "a") {
-       filteredPeople = filteredPeople[0];
+    for (i = 0; i < filteredPeople.length; i++) {
+      peopleFound += "\n" + filteredPeople[i].firstName + " " + filteredPeople[i].lastName;
     }
-    else if (selectedPerson.toLowerCase() === "b") {
-       filteredPeople = filteredPeople[1];
+    alert("Results found:" + peopleFound);
+    searchByName(people);
     }
-    foundPerson = filteredPeople;
-  }
-  else {
-    foundPerson = filteredPeople[0];
-  }
+    else {
+      foundPerson = filteredPeople[0];
+  }   
   mainMenu(foundPerson, people);
 }
 
 function searchByWeight(people) {
-  let userInputWeight = prompt("How much does the person weigh?");
-  let multiplePeopleList = true;
+  let userInput = prompt("How much does the person weigh?");
   let newArray;
-  //while (multiplePeopleList) {
     newArray = people.filter(function (el) {
-    if(el.weight == userInputWeight) { 
+    if(el.weight == userInput) { 
       return true;
     }
-    // else{
-    //   multiplePeopleList = false;
-    // }
     });
-  // }
-  // if (newArray.length > 1) {
-  //   let selectedPerson = prompt("Choose one of the following:" + "\nA) " + newArray[0].firstName + " "+ newArray[0].lastName + "\nB) " + newArray[1].firstName + " " + newArray[1].lastName);  
-  //   if ( selectedPerson.toLowerCase() === "a") {
-  //      newArray = newArray[0];
-  //   }
-  //   else if (selectedPerson.toLowerCase() === "b") {
-  //      newArray = newArray[1];
-  //   }
-  // }
+  return newArray;
+}
+
+function searchByHeight(people) {
+  let userInput = prompt("How tall is the person?");
+  let newArray;
+  newArray = people.filter(function (el) {
+    if(el.height == userInput) { 
+      return true;
+    }
+    });
+  return newArray;
+}
+
+function searchByEyeColor(people) {
+  let userInput = prompt("What color are their eyes?");
+  let newArray;
+  newArray = people.filter(function (el) {
+    if(el.eyeColor == userInput) { 
+      return true;
+    }
+    });
+  return newArray;
+}
+
+// function searchByGender(people) {
+//   let userInput = prompt("What color are their eyes?");
+//   let newArray;
+//   newArray = people.filter(function (el) {
+//     if(el.eyeColor == userInput) { 
+//       return true;
+//     }
+//     });
+//   return newArray;
+// }
+
+// function searchByAge(people) {
+//   let userInput = prompt("What year were they born?");
+//   let userInputMonth = prompt("What month were they born?");
+//   let userInputDay = prompt("What day were they born?");
+
+//   let newArray;
+//   newArray = people.filter(function (el) {
+//     if(el.eyeColor == userInput) { 
+//       return true;
+//     }
+//     });
+//   return newArray;
+// }
+
+function searchByOccupation(people) {
+  let userInput = prompt("What is their occupation?");
+  let newArray;
+  newArray = people.filter(function (el) {
+    if(el.occupation == userInput) { 
+      return true;
+    }
+    });
   return newArray;
 }
 
@@ -158,7 +210,6 @@ function searchByName(people){
         return true;
         }
         });
-
    }
    else if (searchByNameType === "b") {
         firstName = promptFor("What is the person's first name?", chars);
@@ -176,10 +227,10 @@ function searchByName(people){
         }
         });
    }
-   else {
-      alert("Person not found.");
-      searchByName(people);
-   }
+   // else {
+   //    alert("Person not found.");
+   //    //searchByName(people);
+   // }
     mainMenu(personFound[0],people);
     //displayPeople(personFound); 
 
