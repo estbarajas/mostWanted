@@ -24,6 +24,8 @@ function searchByTraits(people) {
   let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
   let filteredPeople;
   let numberOfPeopleFound = 0;
+  let personFound;
+  let newArray;
 
   switch(userSearchChoice) {
     case "height":
@@ -39,34 +41,45 @@ function searchByTraits(people) {
       break;
   }  
 
-  let foundPerson = filteredPeople[0];
+  if (filteredPeople.length > 1) {
+    let selectedPerson = prompt("Choose one of the following:" + "\nA) " + filteredPeople[0].firstName + " "+ filteredPeople[0].lastName + "\nB) " + filteredPeople[1].firstName + " " + filteredPeople[1].lastName);  
+    if ( selectedPerson.toLowerCase() === "a") {
+       filteredPeople = filteredPeople[0];
+    }
+    else if (selectedPerson.toLowerCase() === "b") {
+       filteredPeople = filteredPeople[1];
+    }
+    foundPerson = filteredPeople;
+  }
+  else {
+    foundPerson = filteredPeople[0];
+  }
   mainMenu(foundPerson, people);
-
 }
 
 function searchByWeight(people) {
   let userInputWeight = prompt("How much does the person weigh?");
   let multiplePeopleList = true;
   let newArray;
-  while (multiplePeopleList) {
+  //while (multiplePeopleList) {
     newArray = people.filter(function (el) {
     if(el.weight == userInputWeight) { 
       return true;
     }
-    else{
-      multiplePeopleList = false;
-    }
+    // else{
+    //   multiplePeopleList = false;
+    // }
     });
-  }
-  if (newArray.length > 1) {
-    let selectedPerson = prompt("Choose one of the following:" + "\nA) " + newArray[0].firstName + " "+ newArray[0].lastName + "\nB) " + newArray[1].firstName + " " + newArray[1].lastName);  
-    if ( selectedPerson.toLowerCase() === "a") {
-       mainMenu(newArray[0], people);
-    }
-    else if (selectedPerson.toLowerCase() === "b") {
-       mainMenu(newArray[1], people);
-    }
-  }
+  // }
+  // if (newArray.length > 1) {
+  //   let selectedPerson = prompt("Choose one of the following:" + "\nA) " + newArray[0].firstName + " "+ newArray[0].lastName + "\nB) " + newArray[1].firstName + " " + newArray[1].lastName);  
+  //   if ( selectedPerson.toLowerCase() === "a") {
+  //      newArray = newArray[0];
+  //   }
+  //   else if (selectedPerson.toLowerCase() === "b") {
+  //      newArray = newArray[1];
+  //   }
+  // }
   return newArray;
 }
 
