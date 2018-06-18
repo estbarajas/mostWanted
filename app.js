@@ -23,6 +23,7 @@ function app(people){
 function searchByTraits(people) {
   let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
   let filteredPeople;
+  let numberOfPeopleFound = 0;
 
   switch(userSearchChoice) {
     case "height":
@@ -39,21 +40,33 @@ function searchByTraits(people) {
   }  
 
   let foundPerson = filteredPeople[0];
-
   mainMenu(foundPerson, people);
 
 }
 
 function searchByWeight(people) {
   let userInputWeight = prompt("How much does the person weigh?");
-
-  let newArray = people.filter(function (el) {
-    if(el.weight == userInputWeight) {
+  let multiplePeopleList = true;
+  let newArray;
+  while (multiplePeopleList) {
+    newArray = people.filter(function (el) {
+    if(el.weight == userInputWeight) { 
       return true;
     }
-    // return true if el.height matches userInputHeight
-  });
-
+    else{
+      multiplePeopleList = false;
+    }
+    });
+  }
+  if (newArray.length > 1) {
+    let selectedPerson = prompt("Choose one of the following:" + "\nA) " + newArray[0].firstName + " "+ newArray[0].lastName + "\nB) " + newArray[1].firstName + " " + newArray[1].lastName);  
+    if ( selectedPerson.toLowerCase() === "a") {
+       mainMenu(newArray[0], people);
+    }
+    else if (selectedPerson.toLowerCase() === "b") {
+       mainMenu(newArray[1], people);
+    }
+  }
   return newArray;
 }
 
@@ -75,6 +88,7 @@ function mainMenu(person, people){
     displayPerson(person);
     break;
     case "family":
+    getFamily(person, people);
     // TODO: get person's family
     break;
     case "descendants":
@@ -91,16 +105,29 @@ function mainMenu(person, people){
   }
 }
 
-function findDescendants (person, people) {
-  let addAllDescendants;
+// function findDescendants (person, people) {
+//   let addAllDescendants = " ";
   
-  for (i = 0; i < people.length; i++) {
-    if ((people[i].parents[0] || people[i].parents[1] ) == person.id) {
-    console.log(people[i].firstName);
-    }
-  }
+//   for (i = 0; i < people.length; i++) {
+//     //console.log(people[0]);
+//     if ((people[i].parents[0] || people[i].parents[1] ) == person.id) {
+//     addAllDescendants += ("\nDescendant of " + person.firstName +  " " + person.lastName + ": " + people[i].firstName + " " + people[i].lastName);
+//     //findDescendants(people[i],people);
+//     }
+//   }
+// alert(addAllDescendants);
+//   //findDescendants(people[],people);
  
-}
+// }
+
+function getFamily (person, people) {
+  let addAllFamily = "";
+  for (i = 0; i < people.length; i++) {
+    if ((people[i].parents[0] == person.id)||(people[i].parents[1] == person.id)||(people[i].currentSpouse == person.id)||(person.parents[0] == people[i].id)||(person.parents[1] == people[i].id)){
+    addAllFamily += ("\nFamily member of " + person.firstName +  " " + person.lastName + ": " + people[i].firstName + " " + people[i].lastName);
+    }}
+  alert(addAllFamily);
+  }
 
 function searchByName(people){
    var searchByNameType = prompt("A) Full name search. \nB) First name search. \nC) Last name search.").toLowerCase();
@@ -113,7 +140,6 @@ function searchByName(people){
 
         firstName = promptFor("What is the person's first name?", chars);
         lastName = promptFor("What is the person's last name?", chars);
-       
         personFound = people.filter(function (el) {
         if(el.firstName.toLowerCase() === firstName.toLowerCase() && el.lastName.toLowerCase() === lastName.toLowerCase()) {
         return true;
@@ -127,20 +153,7 @@ function searchByName(people){
         if(el.firstName.toLowerCase() === firstName.toLowerCase()) {
         return true;
         }
-
-        // else {
-        //   //return false;
-        //   alert("No matching results.");
-        //   //return false;
-        //   searchByName(people);
-        // }
         });
-        // if (personFound.length <= 0){
-        //   //console.log("No matching results.");
-        //   alert("No matching results.");
-        //   //searchByName(people);
-        //   return false;
-        // }
    }
    else if (searchByNameType === "c") {
         lastName = promptFor("What is the person's last name?", chars);
