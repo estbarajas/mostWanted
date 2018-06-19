@@ -1,13 +1,8 @@
-/*
-Build all of your functions for displaying and gathering information below (GUI).
-*/
 
-// app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-    // TODO: search by name
     searchByName(people);
     break;
     case 'no':
@@ -63,10 +58,10 @@ function searchByTraits(people) {
     alert("Results found:" + peopleFound);
     searchByName(people);
     }
-    else {
+  else {
       foundPerson = filteredPeople[0];
+      mainMenu(foundPerson, people);
   }   
-  mainMenu(foundPerson, people);
 }
 
 function searchAllTraits(people) {
@@ -76,36 +71,24 @@ function searchAllTraits(people) {
   let partC;
   let partD;
   let partE;
-  
-  //let userInput = prompt("Please enter traits to search? ex:height, weight, eye color, gender, age, occupation.")
+  //let userInput = prompt("Please enter one or multiple traits to search from. ex:height, weight, eye color, gender, age, occupation.")
   if (true) {
     partA = searchByWeight(people);
-
   }
-
   if (true) {
     partB = searchByHeight(people);
-    
   }
-
   if (true) {
     partC = searchByEyeColor(people);
-    
   }
-
   if (true) {
     partD = searchByGender(people);
-    
   }
-
   if (true) {
     partE = searchByOccupation(people);
-    
   }
-  console.log("Found by weight:\n" + displayPeople2(partA) + "\n\nFound by height:\n" + displayPeople2(partB) +  "\n\nFound by eye color:\n" + displayPeople2(partC)+  "\n\nFound by gender:\n" + displayPeople2(partD) +  "\n\nFound by occupation:\n" + displayPeople2(partE));
-
-  return people[0];
-
+  alert("Found by weight:\n" + displayPeople2(partA) + "\n\nFound by height:\n" + displayPeople2(partB) +  "\n\nFound by eye color:\n" + displayPeople2(partC)+  "\n\nFound by gender:\n" + displayPeople2(partD) +  "\n\nFound by occupation:\n" + displayPeople2(partE));
+  searchByName(people);
 }
 
 function searchByWeight(people) {
@@ -240,7 +223,6 @@ function findAllDescendants(foundPerson, people){
  });
  for (let i = 0; i < children.length; i++){
    children = children.concat(findAllDescendants(children[i], people));
-   //console.log(children[5]);
  }
  return children;
 }
@@ -255,45 +237,42 @@ function getFamily (person, people) {
   }
 
 function searchByName(people){
-   var searchByNameType = prompt("A) Full name search. \nB) First name search. \nC) Last name search.").toLowerCase();
-    
-   var firstName;
-   var lastName;
-   let personFound;
-
-   if (searchByNameType === "a") {
-
-        firstName = promptFor("What is the person's first name?", chars);
-        lastName = promptFor("What is the person's last name?", chars);
-        personFound = people.filter(function (el) {
-        if(el.firstName.toLowerCase() === firstName.toLowerCase() && el.lastName.toLowerCase() === lastName.toLowerCase()) {
-        return true;
-        }
-        });
-   }
+  let searchByNameType = prompt("A) Full name search. \nB) First name search. \nC) Last name search.").toLowerCase();
+  let firstName;
+  let lastName;
+  let personFound = "";
+  if (searchByNameType === "a") {
+    firstName = promptFor("What is the person's first name?", chars);
+    lastName = promptFor("What is the person's last name?", chars);
+    for (i = 0; i < people.length; i++){
+      if (people[i].firstName.toLowerCase() === firstName.toLowerCase() && people[i].lastName.toLowerCase() === lastName.toLowerCase()) {
+        personFound = people[i];
+      }
+    }  
+  }
    else if (searchByNameType === "b") {
-        firstName = promptFor("What is the person's first name?", chars);
-        personFound = people.filter(function (el) {
-        if(el.firstName.toLowerCase() === firstName.toLowerCase()) {
-        return true;
-        }
-        });
-   }
-   else if (searchByNameType === "c") {
-        lastName = promptFor("What is the person's last name?", chars);
-        personFound = people.filter(function (el) {
-        if(el.lastName.toLowerCase() === lastName.toLowerCase()) {
-        return true;
-        }
-        });
-   }
-   // else {
-   //    alert("Person not found.");
-   //    //searchByName(people);
-   // }
-    mainMenu(personFound[0],people);
-    //displayPeople(personFound); 
-
+    firstName = promptFor("What is the person's first name?", chars);
+    for (i = 0; i < people.length; i++){
+      if (people[i].firstName.toLowerCase() === firstName.toLowerCase()) {
+        personFound = people[i];
+      }
+    } 
+  }
+  else if (searchByNameType === "c") {
+    lastName = promptFor("What is the person's last name?", chars);
+    for (i = 0; i < people.length; i++){
+      if (people[i].lastName.toLowerCase() === lastName.toLowerCase()) {
+        personFound += "\n" + people[i].firstName + " " + people[i].lastName;
+      }
+    } 
+  }
+  if (searchByNameType === "c") {
+    alert("The results:" + personFound);
+    searchByName(people);
+  }
+  else {
+    mainMenu(personFound,people);
+  }
 }
 
 // alerts a list of people
@@ -323,7 +302,6 @@ function displayPerson(person){
   personInfo += "Parents: " + person.parents + "\n";
   personInfo += "Current spouse: " + person.currentSpouse + "\n";
   personInfo += "Id: " + person.id + "\n";
-
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
