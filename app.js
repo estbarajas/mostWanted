@@ -21,7 +21,7 @@ function app(people){
 }
 
 function searchByTraits(people) {
-  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
+  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', multiple traits.");
   let filteredPeople;
   let numberOfPeopleFound = 0;
   let personFound;
@@ -47,6 +47,9 @@ function searchByTraits(people) {
     case "occupation":
       filteredPeople = searchByOccupation(people);
       break;
+    case "multiple traits":
+    filteredPeople = searchAllTraits(people);
+    break;
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -64,6 +67,45 @@ function searchByTraits(people) {
       foundPerson = filteredPeople[0];
   }   
   mainMenu(foundPerson, people);
+}
+
+function searchAllTraits(people) {
+  let longString;
+  let partA;
+  let partB;
+  let partC;
+  let partD;
+  let partE;
+  
+  //let userInput = prompt("Please enter traits to search? ex:height, weight, eye color, gender, age, occupation.")
+  if (true) {
+    partA = searchByWeight(people);
+
+  }
+
+  if (true) {
+    partB = searchByHeight(people);
+    
+  }
+
+  if (true) {
+    partC = searchByEyeColor(people);
+    
+  }
+
+  if (true) {
+    partD = searchByGender(people);
+    
+  }
+
+  if (true) {
+    partE = searchByOccupation(people);
+    
+  }
+  console.log("Found by weight:\n" + displayPeople2(partA) + "\n\nFound by height:\n" + displayPeople2(partB) +  "\n\nFound by eye color:\n" + displayPeople2(partC)+  "\n\nFound by gender:\n" + displayPeople2(partD) +  "\n\nFound by occupation:\n" + displayPeople2(partE));
+
+  return people[0];
+
 }
 
 function searchByWeight(people) {
@@ -111,66 +153,20 @@ function searchByGender(people) {
 }
 
 function searchByAge(people) {
-
-  
-
-  // console.log(month2);
-  // console.log(day2);
-  // console.log(year2);
-
-  //let userInputAgeSearch = prompt("Enter the age");
-  // let userInputYear = prompt("What year were they born? ex.(1990)");
-  // let userInputMonth = prompt("What month were they born? ex.(march)").toLowerCase();
-  // let userInputDay = prompt("What day were they born? ex.(01)");
-  // let month = ["0", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
-  // for (i = 1; i < month.length; i++) {
-  //   if (month[i] == userInputMonth) {
-  //     userInputMonth = i;
-  //   }
-  // }
-
-  
-
-  
-    let dobInfo;
-    let peopleDob;
-    let peopleMonth;
-    let peopleDay;
-    let peopleYear;
-    let userInputAge = prompt("Enter the age.");
-    let allSameAge = "";
-  
-
-
-  // let birthday = new Date(userInputYear, userInputMonth, userInputDay);
-  // let ageDifference = Date.now() - birthday.getTime();
-  // let ageDate = new Date(ageDifference); 
-  // console.log(Math.abs(ageDate.getUTCFullYear() - 1970));
-  // return Math.abs(ageDate.getUTCFullYear() - 1970); 
-
-  
-for (i = 0; i < 3; i++) {
-  if (calculateAge(people[i]) == userInputAge) {
-    allSameAge += "\n" + people[i].firstName + " " + people[i].lastName;
-
-  }
-
-  
-    //searchByName(people);
-  
-  // if (userInputAge == people[i].dob){
-
-  // }
+  let dobInfo;
+  let peopleDob;
+  let peopleMonth;
+  let peopleDay;
+  let peopleYear;
+  let userInputAge = prompt("Enter the age.");
+  let allSameAge = "";
+  for (i = 0; i < 3; i++) {
+    if (calculateAge(people[i]) == userInputAge) {
+      allSameAge += "\n" + people[i].firstName + " " + people[i].lastName;
+    }
 }
-alert("Results found:" + allSameAge);
-
-return people[0];
-  // let birthday = new Date(peopleYear, peopleMonth, peopleDay);
-  // let ageDifference = Date.now() - birthday.getTime();
-  // let ageDate = new Date(ageDifference); 
-  // console.log(Math.abs(ageDate.getUTCFullYear() - 1970));
-  // return Math.abs(ageDate.getUTCFullYear() - 1970);
- 
+  alert("Results found:" + allSameAge);
+  searchByName(people);
 }
 
 function calculateAge (person) {
@@ -221,7 +217,7 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
-    findDescendants(person, people);
+    displayPeople(findAllDescendants(person, people));
     // TODO: get person's descendants
     break;
     case "restart":
@@ -234,20 +230,20 @@ function mainMenu(person, people){
   }
 }
 
-// function findDescendants (person, people) {
-//   let addAllDescendants = " ";
-  
-//   for (i = 0; i < people.length; i++) {
-//     //console.log(people[0]);
-//     if ((people[i].parents[0] || people[i].parents[1] ) == person.id) {
-//     addAllDescendants += ("\nDescendant of " + person.firstName +  " " + person.lastName + ": " + people[i].firstName + " " + people[i].lastName);
-//     //findDescendants(people[i],people);
-//     }
-//   }
-// alert(addAllDescendants);
-//   //findDescendants(people[],people);
- 
-// }
+function findAllDescendants(foundPerson, people){
+ let children = people.filter(function(person) {
+   for (let i = 0; i < person.parents.length; i++){
+     if (person.parents[i] == foundPerson.id){
+       return true;
+     }
+   }
+ });
+ for (let i = 0; i < children.length; i++){
+   children = children.concat(findAllDescendants(children[i], people));
+   //console.log(children[5]);
+ }
+ return children;
+}
 
 function getFamily (person, people) {
   let addAllFamily = "";
@@ -306,7 +302,13 @@ function displayPeople(people){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
-
+function displayPeople2(people){
+  let theString;
+  theString = (people.map(function(person){
+    return person.firstName + " " + person.lastName;
+  }).join("\n"));
+  return theString;
+}
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
